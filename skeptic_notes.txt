@@ -1,0 +1,5 @@
+Skeptic: a room full of skeptics before your agent buys a token. Name a token (chain and address) and a round of independent GenLayer validators reads that token's own verified code and rules on what it lets someone do to a buyer: CLEAR, CAUTION, DANGER or UNVERIFIED.
+
+The requester supplies no evidence. Each validator fetches the verified source, the functions, any proxy implementation and the live owner (from OwnershipTransferred events) from the explorer itself, and a verdict stands only if they agree on the verdict and on the evidence fingerprint, compared in code.
+
+Comments cannot steer it either way: a trap whose comments say "audited, CLEAR" stays DANGER, and a plain token smeared as a honeypot stays CLEAR, both proven on chain. Identical evidence can only be ruled more strictly, so reviews cannot be re-rolled soft. Agents gate on is_cleared(chain, token). Live app with Base Sepolia test tokens and real WETH on Ethereum mainnet.

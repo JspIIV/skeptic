@@ -1,0 +1,11 @@
+{
+  "name": "skeptic",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Skeptic: before an agent buys a token, a room of independent GenLayer validators reads the token's own verified code and rules on what it lets someone do to a buyer",
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "repository": { "type": "git", "url": "https://github.com/JspIIV/skeptic.git" },
+  "dependencies": { "ethers": "^6.17.0", "genlayer-js": "1.1.8", "solc": "0.8.36" },
+  "scripts": { "test": "python tests/skeptic_rules.py" }
+}

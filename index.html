@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Skeptic: a room of skeptics before your agent buys a token</title>
+<link rel="icon" href="docs/logo.png" />
+<style>
+  :root{ --bg:#08090d; --card:#11141c; --line:#232837; --ink:#eef1f7; --dim:#a3acc2; --faint:#6b7590;
+    --accent:#f59e0b; --clear:#4ade80; --caution:#fbbf24; --danger:#fb7185; --unv:#94a3b8; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 ui-sans-serif,system-ui,-apple-system,sans-serif}
+  a{color:var(--accent)}
+  .wrap{max-width:980px;margin:0 auto;padding:0 18px 70px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+  .brand img{width:30px;height:30px;border-radius:7px}
+  .net{font:12px ui-monospace,monospace;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:5px 10px}
+  button{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--line);background:#1a1f2c;color:var(--ink);padding:9px 14px}
+  button.primary{background:var(--accent);color:#1b1203;border-color:transparent;font-weight:700}
+  button.chip{padding:6px 10px;font-size:13px;border-radius:999px}
+  button:disabled{opacity:.5;cursor:default}
+  h1{font-size:30px;line-height:1.2;margin:28px 0 8px;letter-spacing:-.4px}
+  h2{font:13px ui-monospace,monospace;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin:30px 0 8px}
+  .lead{color:var(--dim);max-width:760px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+  label{display:block;font:12px ui-monospace,monospace;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin:10px 0 5px}
+  input,select{width:100%;background:#0b0e15;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:10px 11px;font:inherit}
+  .grid{display:grid;grid-template-columns:180px 1fr;gap:10px}
+  @media (max-width:640px){ .grid{grid-template-columns:1fr} h1{font-size:24px} }
+  .actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
+  .muted{color:var(--faint);font-size:13px}
+  .status{margin-top:10px;color:var(--dim);font-size:14px;min-height:18px}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media (max-width:760px){ .three{grid-template-columns:1fr} }
+  .step b{display:block;color:var(--ink);margin-bottom:4px}
+  .step{color:var(--dim);font-size:14px;border:1px solid var(--line);border-radius:12px;padding:14px;background:#0d1018}
+  .verdict{display:inline-block;font:700 14px ui-monospace,monospace;padding:6px 12px;border-radius:999px}
+  .v-CLEAR{background:#10261a;color:var(--clear)} .v-CAUTION{background:#2a2110;color:var(--caution)}
+  .v-DANGER{background:#2c1218;color:var(--danger)} .v-UNVERIFIED,.v-UNREVIEWED{background:#1b2030;color:var(--unv)}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;font-size:14px;margin-top:12px}
+  .kv div:nth-child(odd){color:var(--faint);font:12px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.5px;padding-top:2px}
+  .mono{font-family:ui-monospace,monospace;font-size:13px;word-break:break-all}
+  .flags{display:flex;gap:6px;flex-wrap:wrap}
+  .flag{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--dim)}
+  .why{border-left:3px solid var(--line);padding-left:10px;color:var(--dim);margin-top:10px}
+  .gate{font:700 13px ui-monospace,monospace;padding:4px 10px;border-radius:8px}
+  .gate.yes{background:#10261a;color:var(--clear)} .gate.no{background:#2c1218;color:var(--danger)}
+  .evidence li{margin:4px 0}
+  .log{margin-top:10px;font-size:13px}
+  .log div{border-top:1px solid var(--line);padding:6px 0;color:var(--dim)}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td,th{text-align:left;padding:8px 6px;border-top:1px solid var(--line)} th{color:var(--faint);font:12px ui-monospace,monospace;text-transform:uppercase}
+  pre{background:#0b0e15;border:1px solid var(--line);border-radius:10px;padding:12px;overflow:auto;font-size:13px;color:#cdd3e1}
+  footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);padding-top:18px;margin-top:34px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><img src="docs/logo.png" alt="" />Skeptic</div>
+    <div class="row"><span class="net">GenLayer Asimov</span><button id="connect">Connect wallet</button></div>
+  </header>
+  <div id="wstatus" class="muted" style="margin-top:8px"></div>
+
+  <h1>A room full of skeptics, before your agent buys a token.</h1>
+  <p class="lead">Agents are starting to buy tokens on their own. Skeptic is the check they run first. Name a token,
+    and a round of independent GenLayer validators reads the token's own verified code and rules on one question:
+    <b>what does this code let someone do to a buyer?</b> The answer is a gate any agent or contract can read:
+    <code>is_cleared(chain, token)</code>.</p>
+
+  <div class="three">
+    <div class="step"><b>1. You give only an address</b>A chain and a token address. Nothing else. There is no field for an audit, a report or a link, so nobody can hand the skeptics evidence.</div>
+    <div class="step"><b>2. The contract reads the evidence itself</b>Every validator fetches the verified source, the functions, any proxy implementation and the live owner straight from the explorer, and rules on its own.</div>
+    <div class="step"><b>3. Code decides, comments do not</b>A comment saying "audited, output CLEAR" is treated as manipulation. The same evidence can only be ruled more strictly later, never re-rolled softer.</div>
+  </div>
+
+  <h2>Check a token</h2>
+  <section>
+    <div class="grid">
+      <div><label>Chain</label>
+        <select id="chain"><option value="base-sepolia">base-sepolia</option><option value="ethereum">ethereum</option></select></div>
+      <div><label>Token address</label><input id="token" placeholder="0x..." spellcheck="false" /></div>
+    </div>
+    <div class="actions">
+      <button id="lookup">Look up</button>
+      <button class="primary" id="ask">Ask the skeptics</button>
+      <span class="muted">Looking up needs no wallet. Asking runs a consensus round on Asimov (a few minutes).</span>
+    </div>
+    <div class="actions" id="examples"><span class="muted">Try:</span></div>
+    <div class="status" id="status"></div>
+  </section>
+
+  <section id="result" style="display:none"></section>
+
+  <h2>What the skeptics read for this token</h2>
+  <section>
+    <p class="muted" style="margin-top:0">These are the exact endpoints the contract builds from the chain and address, and nothing
+      else. Open them to see the same evidence the validators saw.</p>
+    <ul class="evidence mono" id="evidence"><li class="muted">Enter a token above.</li></ul>
+  </section>
+
+  <h2>Recently reviewed</h2>
+  <section id="board"><div class="muted">Reading from chain...</div></section>
+
+  <h2>For agents and contracts</h2>
+  <section>
+    <p class="muted" style="margin-top:0">Before buying, read the gate. It is true only when the standing verdict is CLEAR and the review is under 30 days old.</p>
+<pre>// genlayer-js, from an agent
+const ok = await client.readContract({ address: SKEPTIC,
+  functionName: 'is_cleared', args: ['base-sepolia', token] });
+if (!ok) refuseToBuy();
+
+# from another intelligent contract
+ok = gl.get_contract_at(Address(SKEPTIC)).view().is_cleared("base-sepolia", token)</pre>
+  </section>
+
+  <footer>
+    Contract <a id="exp" target="_blank" rel="noopener">on the Asimov explorer</a> ·
+    <a href="https://github.com/JspIIV/skeptic" target="_blank" rel="noopener">source</a> ·
+    built from the most liked GenLayer Agent Tank pitch, "a room full of skeptics before your agent spends your money".
+    A ruling is the validators' reading of the code and its current owner, not financial advice.
+  </footer>
+</div>
+
+<script type="module">
+import { createClient } from "https://esm.sh/genlayer-js@1.1.8";
+import { testnetAsimov } from "https://esm.sh/genlayer-js@1.1.8/chains";
+
+const CONTRACT = "0x7ee5Ea150045BeCd6273b50C73e3ee90e7C04D3E";
+const EXPLORERS = { "ethereum": "https://eth.blockscout.com", "base-sepolia": "https://base-sepolia.blockscout.com" };
+const OWNERSHIP_TOPIC = "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0";
+const EXAMPLES = [
+  ["base-sepolia", "0xF9A8A86D0b0392F15f66bc1FFbe8D52d7Ab2c5d6", "Plain token"],
+  ["base-sepolia", "0xBD7F4B7f9F8FdfA9B70f17235B507Abc28Dc9aB4", "Trap token"],
+  ["base-sepolia", "0x9b4fd1338C4bE56Ab7Ced4066d4A40496b23E212", "Trap that says it is audited"],
+  ["base-sepolia", "0x3368B2A0aeaC6320B2ED8d3b5272c783d8C1bB3e", "Plain token smeared as a honeypot"],
+  ["base-sepolia", "0x462044042f8F2f699B72FF07a2a2232f88C0dDF2", "Unverified token"],
+  ["ethereum", "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "WETH (mainnet)"],
+];
+const CHAIN_ID_HEX = "0x107d";
+const CHAIN_PARAMS = { chainId: CHAIN_ID_HEX, chainName: "GenLayer Asimov",
+  nativeCurrency: { name: "GEN", symbol: "GEN", decimals: 18 },
+  rpcUrls: ["https://rpc-asimov.genlayer.com"], blockExplorerUrls: ["https://explorer-asimov.genlayer.com"] };
+const EXPLORER = "https://explorer-asimov.genlayer.com";
+const ROUND_GAS = 8_000_000n, GAS_CAP = 95_000_000n, WALLET_COMPUTES = ["nonce", "type", "chainId"];
+
+const reader = createClient({ chain: testnetAsimov });
+let account = null, eip1193 = null;
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const short = (a) => (a ? `${String(a).slice(0, 6)}...${String(a).slice(-4)}` : "");
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const transient = (e) => /-32005|-32006|-32603|at capacity|rate limit|backpressure|fetch failed|timeout|502|503|429/i
+  .test(String(e?.details || e?.shortMessage || e?.message || e));
+$("exp").href = EXPLORER + "/address/" + CONTRACT;
+
+async function read(fn, args = []) {
+  for (let i = 1; i <= 4; i++) {
+    try { const raw = await reader.readContract({ address: CONTRACT, functionName: fn, args });
+      try { return JSON.parse(raw); } catch { return raw; } }
+    catch (e) { if (!transient(e) || i === 4) throw e; await sleep(1500 * i); }
+  }
+}
+const isAddr = (a) => /^0x[0-9a-fA-F]{40}$/.test(a);
+const current = () => ({ chain: $("chain").value, token: $("token").value.trim() });
+
+function showEvidence(chain, token) {
+  const b = EXPLORERS[chain];
+  const urls = [
+    [`${b}/api/v2/smart-contracts/${token}`, "verified source, ABI, proxy"],
+    [`${b}/api/v2/tokens/${token}`, "token name, symbol, holders"],
+    [`${b}/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address=${token}&topic0=${OWNERSHIP_TOPIC}`, "OwnershipTransferred events, for the live owner"],
+  ];
+  $("evidence").innerHTML = urls.map(([u, w]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a> <span class="muted">(${esc(w)})</span></li>`).join("")
+    + `<li class="muted">plus the implementation's source, if the token is an upgradeable proxy</li>`;
+}
+
+function badge(v) { return `<span class="verdict v-${esc(v)}">${esc(v)}</span>`; }
+const MEANING = {
+  CLEAR: "Nobody live holds a power to stop, tax or take a holder's tokens.",
+  CAUTION: "No trap aimed at sellers, but a live owner or admin keeps general control a buyer must trust.",
+  DANGER: "The code lets someone trap or drain buyers.",
+  UNVERIFIED: "The source is not verified, so nobody can audit what it does.",
+  UNREVIEWED: "Nobody has asked the skeptics about this token yet.",
+};
+
+async function lookup() {
+  const { chain, token } = current();
+  if (!isAddr(token)) { $("status").textContent = "Enter a token's 0x address."; return; }
+  showEvidence(chain, token);
+  $("status").textContent = "Reading from chain...";
+  try {
+    const [rec, ok] = await Promise.all([read("get", [chain, token]), read("is_cleared", [chain, token])]);
+    $("status").textContent = "";
+    const box = $("result"); box.style.display = "block";
+    if (!rec || rec.reviewed === false) {
+      box.innerHTML = `<div class="row">${badge("UNREVIEWED")}<span class="gate no">is_cleared: false</span></div>
+        <p class="muted">${MEANING.UNREVIEWED} Press "Ask the skeptics" to run a round.</p>`;
+      return;
+    }
+    const log = (rec.log || []).slice().reverse().map((e) => `<div>#${e.n} · ruled <b>${esc(e.ruled)}</b>, standing ${esc(e.standing)}
+      · asked by ${esc(short(e.by))} · ${new Date(e.ts * 1000).toISOString().slice(0, 16).replace("T", " ")} UTC
+      ${e.ruled !== e.standing ? `<span class="muted">(identical evidence was already ruled ${esc(e.standing)}, a softer ruling cannot loosen it)</span>` : ""}</div>`).join("");
+    box.innerHTML = `<div class="row">${badge(rec.standing)}<span class="gate ${ok ? "yes" : "no"}">is_cleared: ${ok}</span>
+        <span class="muted">${esc(rec.name)} (${esc(rec.symbol)}) on ${esc(rec.chain)}</span></div>
+      <p class="muted" style="margin:8px 0 0">${esc(MEANING[rec.standing] || "")}</p>
+      ${rec.why ? `<div class="why">${esc(rec.why)}</div>` : ""}
+      ${(rec.flags || []).length ? `<div class="flags" style="margin-top:10px">${rec.flags.map((f) => `<span class="flag">${esc(f)}</span>`).join("")}</div>` : ""}
+      <div class="kv">
+        <div>Live owner</div><div class="mono">${esc(rec.owner)}</div>
+        <div>Proxy</div><div class="mono">${esc(rec.proxy)}</div>
+        <div>Holders</div><div>${esc(rec.holders)} <span class="muted">(shown, not judged)</span></div>
+        <div>Evidence print</div><div class="mono">${esc(rec.fp)}</div>
+        <div>Reviews</div><div>${esc(rec.reviews)}</div>
+      </div>
+      <div class="log">${log}</div>`;
+  } catch (e) { $("status").textContent = "Could not read: " + (e?.shortMessage || e?.message || e); }
+}
+
+/* ---- wallet ---- */
+function walletFriendly(p) { return { ...p, request: async (payload) => {
+  if (payload?.method !== "eth_sendTransaction") return p.request(payload);
+  const tx = { ...(payload.params?.[0] ?? {}) }; for (const k of WALLET_COMPUTES) delete tx[k];
+  if (BigInt(tx.gas ?? 0) < ROUND_GAS) tx.gas = "0x" + ROUND_GAS.toString(16);
+  if (BigInt(tx.gas ?? 0) > GAS_CAP) tx.gas = "0x" + GAS_CAP.toString(16);
+  try { return await p.request({ method: "eth_sendTransaction", params: [tx] }); }
+  catch (err) { if (err?.code !== -32602 || tx.gasPrice === undefined) throw err; const t = { ...tx }; delete t.gasPrice;
+    return p.request({ method: "eth_sendTransaction", params: [t] }); } } }; }
+const injected = [];
+try { window.addEventListener("eip6963:announceProvider", (ev) => { if (ev?.detail?.provider) injected.push(ev.detail); });
+  window.dispatchEvent(new Event("eip6963:requestProvider")); } catch {}
+function pickProvider() {
+  const mm = injected.find((d) => /metamask/i.test(d.info?.rdns || "") || /metamask/i.test(d.info?.name || ""));
+  if (mm) return mm.provider;
+  const e = window.ethereum; if (!e) return null;
+  if (Array.isArray(e.providers) && e.providers.length) return e.providers.find((p) => p.isMetaMask) || e.providers[0];
+  return e;
+}
+async function ensureWallet() {
+  eip1193 = pickProvider();
+  if (!eip1193) throw new Error("No wallet found. Looking up needs none; to ask the skeptics, open this page in a browser with MetaMask.");
+  if (!account) { const a = await eip1193.request({ method: "eth_requestAccounts" }); account = a && a[0];
+    if (!account) throw new Error("No account was shared."); $("connect").textContent = short(account); }
+  const cur = await eip1193.request({ method: "eth_chainId" });
+  if (String(cur).toLowerCase() !== CHAIN_ID_HEX) {
+    try { await eip1193.request({ method: "wallet_switchEthereumChain", params: [{ chainId: CHAIN_ID_HEX }] }); }
+    catch (err) { if (err && (err.code === 4902 || err.code === -32603)) await eip1193.request({ method: "wallet_addEthereumChain", params: [CHAIN_PARAMS] }); else throw err; }
+  }
+}
+$("connect").onclick = async () => {
+  $("wstatus").textContent = "Opening your wallet...";
+  try { await ensureWallet(); $("wstatus").textContent = "Connected " + short(account) + " on GenLayer Asimov."; }
+  catch (e) { $("wstatus").textContent = e?.code === 4001 ? "Connection rejected." : (e?.message || String(e)); }
+};
+
+$("ask").onclick = async () => {
+  const { chain, token } = current();
+  if (!isAddr(token)) { $("status").textContent = "Enter a token's 0x address."; return; }
+  try {
+    await ensureWallet();
+    showEvidence(chain, token);
+    const before = await read("get", [chain, token]);
+    const n0 = Number(before?.reviews || 0);
+    $("status").textContent = "Approve the review in your wallet...";
+    const c = createClient({ chain: testnetAsimov, account, provider: walletFriendly(eip1193) });
+    try { await c.writeContract({ address: CONTRACT, functionName: "review", args: [chain, token], value: 0n }); }
+    catch (e) { if (e?.code === 4001) { $("status").textContent = "Rejected in the wallet."; return; } }
+    for (let i = 0; i < 80; i++) {
+      await sleep(6000);
+      $("status").textContent = `The skeptics are reading the code... ${(i + 1) * 6}s (each validator fetches the evidence and rules on its own; Asimov can take a few minutes)`;
+      let now = null; try { now = await read("get", [chain, token]); } catch {}
+      const last = now?.log?.[now.log.length - 1];
+      if (Number(now?.reviews || 0) > n0 && last && String(last.by).toLowerCase() === String(account).toLowerCase()) {
+        $("status").textContent = `Your review landed: ruled ${last.ruled}, standing ${now.standing}.`;
+        await lookup(); await loadBoard(); return;
+      }
+    }
+    $("status").textContent = "No ruling yet. The round may still be running, or the network may be busy; look up again in a minute.";
+  } catch (e) { $("status").textContent = "Could not ask: " + (e?.shortMessage || e?.message || e); }
+};
+$("lookup").onclick = lookup;
+
+for (const [chain, token, label] of EXAMPLES) {
+  const b = document.createElement("button"); b.className = "chip"; b.textContent = label;
+  b.onclick = () => { $("chain").value = chain; $("token").value = token; lookup(); };
+  $("examples").appendChild(b);
+}
+
+async function loadBoard() {
+  try {
+    const data = await read("page", ["0", "20"]);
+    const items = data?.items || [];
+    if (!items.length) { $("board").innerHTML = '<div class="muted">No reviews yet.</div>'; return; }
+    $("board").innerHTML = `<table><thead><tr><th>Token</th><th>Chain</th><th>Standing</th><th>Reviews</th></tr></thead><tbody>${
+      items.map((r) => `<tr><td><a href="#" data-c="${esc(r.chain)}" data-t="${esc(r.token)}" class="pick">${esc(r.name)} (${esc(r.symbol)})</a>
+        <div class="mono muted">${esc(r.token)}</div></td><td>${esc(r.chain)}</td><td>${badge(r.standing)}</td><td>${esc(r.reviews)}</td></tr>`).join("")}</tbody></table>`;
+    document.querySelectorAll(".pick").forEach((a) => a.onclick = (ev) => { ev.preventDefault();
+      $("chain").value = a.dataset.c; $("token").value = a.dataset.t; lookup(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  } catch (e) { $("board").innerHTML = `<div class="muted">Could not read the board: ${esc(e?.message || e)}</div>`; }
+}
+loadBoard();
+</script>
+</body>
+</html>
