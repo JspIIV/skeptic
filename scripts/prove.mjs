@@ -49,21 +49,51 @@ async function send(who, args) {
     catch (e) { if (!transient(e) || a >= 12) throw e; say(`    (send ${String(e.message || e).slice(0, 40)}, retry)`); await sleep(Math.min(6000 * a, 30000)); }
   }
 }
-async function review(who, chain, token, label) {
-  const before = Number((await read('get', [chain, token])).reviews || 0);
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try { await send(who, [chain, token]); } catch (e) { say(`    ${label}: send failed ${String(e.message || e).slice(0, 60)}`); }
-    for (let i = 0; i < 70; i++) {
+async function txState(hash) {
+  try {
+    const raw = await withTimeout(anybody.getTransaction({ hash }), 30000);
+    const tx = JSON.parse(JSON.stringify(raw, (k, v) => (typeof v === 'bigint' ? v.toString() : v)));
+    return { status: String(tx.statusName || ''), exec: String(tx.txExecutionResultName || ''), result: String(tx.resultName || '') };
+  } catch { return { status: '', exec: '', result: '' }; }
+}
+// One review that lands. NOT_VOTED means the validators never ran the round: nothing changed,
+// so sending again is correct and safe. Resume: `want` is how many reviews the token must have.
+async function review(who, chain, token, label, want = 1) {
+  let g = await read('get', [chain, token]);
+  if (Number(g.reviews || 0) >= want) {
+    const last = g.log[g.log.length - 1];
+    say(`  ${label}: ruled ${last.ruled}, standing ${g.standing} (already on chain) | ${(g.why || '').slice(0, 150)}`);
+    return g;
+  }
+  const before = Number(g.reviews || 0);
+  for (let attempt = 1; attempt <= 6; attempt++) {
+    let hash = null;
+    try { hash = await send(who, [chain, token]); } catch (e) { say(`    ${label}: send failed ${String(e.message || e).slice(0, 60)}`); }
+    for (let i = 0; i < 60; i++) {
       await sleep(15000);
-      const g = await read('get', [chain, token]);
+      g = await read('get', [chain, token]);
       if (Number(g.reviews || 0) > before) {
         const last = g.log[g.log.length - 1];
-        say(`  ${label}: ruled ${last.ruled}, standing ${g.standing} (${(i + 1) * 15}s) | ${(g.why || '').slice(0, 150)}`);
+        say(`  ${label}: ruled ${last.ruled}, standing ${g.standing} (attempt ${attempt}, ${(i + 1) * 15}s) | ${(g.why || '').slice(0, 150)}`);
         if ((g.flags || []).length) say(`      flags: ${g.flags.join('; ')}`);
         return g;
       }
+      if (hash && i % 2 === 1) {
+        const st = await txState(hash);
+        if (st.status === 'FINALIZED' || st.status === 'ACCEPTED' || st.status === 'UNDETERMINED') {
+          // A round that returned may still be landing in the readable state: look again
+          // before concluding it recorded nothing, or a resend would double the review.
+          let landed = false;
+          for (let k = 0; k < 4 && !landed; k++) {
+            await sleep(10000);
+            landed = Number((await read('get', [chain, token])).reviews || 0) > before;
+          }
+          if (landed) continue;
+          say(`    ${label}: ${st.status} ${st.exec} ${st.result} with nothing recorded, sending again`);
+          break;
+        }
+      }
     }
-    say(`  ${label}: not settled, resubmitting`);
   }
   return await read('get', [chain, token]);
 }
@@ -82,7 +112,7 @@ const hidden = await review(padv, 'base-sepolia', T.HiddenToken.address, 'Hidden
 const weth = await review(ppub, 'ethereum', WETH, 'WETH on Ethereum mainnet');
 say('');
 say('reviewing the trap again on identical evidence...');
-const trap2 = await review(ppub, 'base-sepolia', T.TrapToken.address, 'TrapToken again');
+const trap2 = await review(ppub, 'base-sepolia', T.TrapToken.address, 'TrapToken again', 2);
 
 const cleared = {};
 for (const [k, chain, a] of [['plain', 'base-sepolia', T.PlainToken.address], ['trap', 'base-sepolia', T.TrapToken.address],
