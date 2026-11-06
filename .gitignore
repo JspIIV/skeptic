@@ -1,3 +1,5 @@
 node_modules/
 build/
 .env
+
+results/run*.log

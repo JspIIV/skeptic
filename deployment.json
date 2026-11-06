@@ -1,6 +1,6 @@
 {
-  "network": "genlayer testnet asimov",
-  "address": "0x7ee5Ea150045BeCd6273b50C73e3ee90e7C04D3E",
-  "tx": "0x188cddfa83a7ec7882fbce6251fd3e7bbb0f55e4f5c8a77f446df862b1a8ae1e",
-  "deployed_at": "2026-10-18T08:47:03.922Z"
+  "network": "genlayer testnet bradbury phase 2",
+  "address": "0x5C2889eE6B26F34534D1B3Fe9302053ac2B19B60",
+  "tx": "0xe60538c593ced6a95c3768fbcd5dfa0587eb2a0f09b64883e0b1f2a373c607ec",
+  "deployed_at": "2026-11-06T22:20:15.237Z"
 }

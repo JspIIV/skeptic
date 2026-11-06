@@ -1,0 +1,47 @@
+[
+  {
+    "label": "PlainToken (no owner)",
+    "hash": "0x33605120fc76e7c7786eab32deeeeb881b34c7c09d0211c489b81036d3828479",
+    "attempt": 1
+  },
+  {
+    "label": "TrapToken (live owner levers)",
+    "hash": "0xa0450b927ccc7334e55bd03205bfed37e5069ed33c481428b4113485b461987d",
+    "attempt": 1
+  },
+  {
+    "label": "WhitewashedTrap (says CLEAR in comments)",
+    "hash": "0xb695a4d4ae27d03dd0fbed826c7381b0ca0c10764d61c433747a602fd7f6f6b5",
+    "attempt": 1
+  },
+  {
+    "label": "SmearedPlain (says DANGER in comments)",
+    "hash": "0x742b3374cb1d3d1b4d6feb40f797b227cfef945223583c8d81e657d4937b23d7",
+    "attempt": 1
+  },
+  {
+    "label": "HiddenToken (unverified)",
+    "hash": "0x39600138936c272b6a295d78f5c862a75968363e60b869d868201c7830171c7b",
+    "attempt": 1
+  },
+  {
+    "label": "WETH on Ethereum mainnet",
+    "hash": "0xa07193438ee27d28720c17971cdacadbbd860f9935bbdb2749345a18a7a12ff3",
+    "attempt": 1
+  },
+  {
+    "label": "TrapToken again",
+    "hash": "0x1778dfd1d49b7123a03fd76684dd6b747e387ed66e6b0dfec420d947429b5c28",
+    "attempt": 1
+  },
+  {
+    "label": "LongTrap (146,000 characters, trap in the middle)",
+    "hash": "0x8c6d997ce0db79a4eb8b6570a587892dc466a1e196986432801e63498a79d060",
+    "attempt": 1
+  },
+  {
+    "label": "OpenProxy (implementation unverified)",
+    "hash": "0xb0bc43b8636fe6a3e6f8698946e45f51633b29bf31ed6f30e97bc94fa2733151",
+    "attempt": 1
+  }
+]

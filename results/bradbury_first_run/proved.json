@@ -1,0 +1,555 @@
+{
+  "proved_at": "2026-11-06T21:59:14.840Z",
+  "network": "genlayer testnet bradbury phase 2",
+  "contract": "0x28639fA52B006f2a0777101464EF65737CDe5345",
+  "tokens": {
+    "PlainToken": {
+      "address": "0xF9A8A86D0b0392F15f66bc1FFbe8D52d7Ab2c5d6",
+      "tx": "0xe22110495efca78268ce40c30819f0683b821f63ed6f1087f30f061a5a418c28",
+      "verified": true
+    },
+    "TrapToken": {
+      "address": "0xBD7F4B7f9F8FdfA9B70f17235B507Abc28Dc9aB4",
+      "tx": "0x37f5517f71ae1e7d70cb15416de7c83cf0ec52e496f56c55b4e6c00c08ffda24",
+      "verified": true
+    },
+    "WhitewashedTrap": {
+      "address": "0x9b4fd1338C4bE56Ab7Ced4066d4A40496b23E212",
+      "tx": "0x672c4ab53098da04da8888c22fb0ba0c7c6aeb07bb7fa97cb4a848d2ad7f865f",
+      "verified": true
+    },
+    "SmearedPlain": {
+      "address": "0x3368B2A0aeaC6320B2ED8d3b5272c783d8C1bB3e",
+      "tx": "0xec425eb7cccbe93a6eb3b99d58a08426d569304fdd3f4146ffe694939128fc31",
+      "verified": true
+    },
+    "HiddenToken": {
+      "address": "0x462044042f8F2f699B72FF07a2a2232f88C0dDF2",
+      "tx": "0xab4c28740e57252084e8668d426073e847780ca5891333612bebbab804583401",
+      "verified": false
+    },
+    "LongTrap": {
+      "address": "0x3b8c80894075C617Dcc9251d8816f090E021cf04",
+      "tx": "0xf2aad864d97d297fec7dc08a3e13b5b5a85944fd0b9ca15333f93ad048adf233",
+      "verified": true
+    },
+    "SecretImpl": {
+      "address": "0x906c80a4503bcFf9d70bAb0794b9D12F45e1E1c0",
+      "tx": "0xa5a7300b9b49907d80f56cacde73dcdfc5d3938a687dc504b4790954097e1870",
+      "verified": false
+    },
+    "OpenProxy": {
+      "address": "0x9E9FD8b1Cb916d21e054bF29e005f5A756EAb330",
+      "tx": "0x760928cb0f4d761b84d8acd26b02557a017870a93c99320ec1e917f82b8fa07a",
+      "verified": true
+    }
+  },
+  "weth": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "txs": [
+    {
+      "label": "PlainToken (no owner)",
+      "hash": "0x33605120fc76e7c7786eab32deeeeb881b34c7c09d0211c489b81036d3828479",
+      "attempt": 1
+    },
+    {
+      "label": "TrapToken (live owner levers)",
+      "hash": "0xa0450b927ccc7334e55bd03205bfed37e5069ed33c481428b4113485b461987d",
+      "attempt": 1
+    },
+    {
+      "label": "WhitewashedTrap (says CLEAR in comments)",
+      "hash": "0xb695a4d4ae27d03dd0fbed826c7381b0ca0c10764d61c433747a602fd7f6f6b5",
+      "attempt": 1
+    },
+    {
+      "label": "SmearedPlain (says DANGER in comments)",
+      "hash": "0x742b3374cb1d3d1b4d6feb40f797b227cfef945223583c8d81e657d4937b23d7",
+      "attempt": 1
+    },
+    {
+      "label": "HiddenToken (unverified)",
+      "hash": "0x39600138936c272b6a295d78f5c862a75968363e60b869d868201c7830171c7b",
+      "attempt": 1
+    },
+    {
+      "label": "WETH on Ethereum mainnet",
+      "hash": "0xa07193438ee27d28720c17971cdacadbbd860f9935bbdb2749345a18a7a12ff3",
+      "attempt": 1
+    },
+    {
+      "label": "TrapToken again",
+      "hash": "0x1778dfd1d49b7123a03fd76684dd6b747e387ed66e6b0dfec420d947429b5c28",
+      "attempt": 1
+    },
+    {
+      "label": "LongTrap (146,000 characters, trap in the middle)",
+      "hash": "0x8c6d997ce0db79a4eb8b6570a587892dc466a1e196986432801e63498a79d060",
+      "attempt": 1
+    },
+    {
+      "label": "OpenProxy (implementation unverified)",
+      "hash": "0xb0bc43b8636fe6a3e6f8698946e45f51633b29bf31ed6f30e97bc94fa2733151",
+      "attempt": 1
+    }
+  ],
+  "reviews": {
+    "plain": {
+      "chain": "base-sepolia",
+      "token": "0xf9a8a86d0b0392f15f66bc1ffbe8d52d7ab2c5d6",
+      "worst": {
+        "a3e6df52b2e1e9f2179260cb": "CLEAR"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001430,
+          "by": "0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+          "ruled": "CLEAR",
+          "standing": "CLEAR",
+          "fp": "a3e6df52b2e1e9f2179260cb",
+          "flags": [],
+          "gaps": [],
+          "why": "The code has no owner, admin, or special powers that could be used to trap or control holders."
+        }
+      ],
+      "name": "Plain Test Token",
+      "symbol": "PLAIN",
+      "holders": "3",
+      "owner": "none: no OwnershipTransferred event and no owner functions",
+      "proxy": "none",
+      "standing": "CLEAR",
+      "fp": "a3e6df52b2e1e9f2179260cb",
+      "last_ts": 1794001430,
+      "flags": [],
+      "gaps": [],
+      "why": "The code has no owner, admin, or special powers that could be used to trap or control holders."
+    },
+    "trap": {
+      "chain": "base-sepolia",
+      "token": "0xbd7f4b7f9f8fdfa9b70f17235b507abc28dc9ab4",
+      "worst": {
+        "ad2d96dfac6fdef76ef114a4": "DANGER"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001501,
+          "by": "0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+          "ruled": "DANGER",
+          "standing": "DANGER",
+          "fp": "ad2d96dfac6fdef76ef114a4",
+          "flags": [
+            "owner-set sell tax up to 100%",
+            "owner-controlled trading switch",
+            "owner-controlled blocklist"
+          ],
+          "gaps": [],
+          "why": "The live owner can raise the sell tax to 100%, close trading to block sales into markets, and block specific holders from transferring."
+        }
+      ],
+      "name": "Trap Test Token",
+      "symbol": "TRAP",
+      "holders": "1",
+      "owner": "held by 0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+      "proxy": "none",
+      "standing": "DANGER",
+      "fp": "ad2d96dfac6fdef76ef114a4",
+      "last_ts": 1794001501,
+      "flags": [
+        "owner-set sell tax up to 100%",
+        "owner-controlled trading switch",
+        "owner-controlled blocklist"
+      ],
+      "gaps": [],
+      "why": "The live owner can raise the sell tax to 100%, close trading to block sales into markets, and block specific holders from transferring."
+    },
+    "wash": {
+      "chain": "base-sepolia",
+      "token": "0x9b4fd1338c4be56ab7ced4066d4a40496b23e212",
+      "worst": {
+        "c6eecdfec3203fd0d658bb52": "DANGER"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001585,
+          "by": "0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c",
+          "ruled": "DANGER",
+          "standing": "DANGER",
+          "fp": "c6eecdfec3203fd0d658bb52",
+          "flags": [
+            "owner can set high sell tax",
+            "owner can block any address from transferring",
+            "owner can close trading for ordinary holders"
+          ],
+          "gaps": [],
+          "why": "The live owner has the power to block any holder from transferring, impose a sell tax of up to 100%, and disable trading for non-owner sells, all of which can trap or drain buyers."
+        }
+      ],
+      "name": "Whitewashed Test Token",
+      "symbol": "WASH",
+      "holders": "1",
+      "owner": "held by 0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+      "proxy": "none",
+      "standing": "DANGER",
+      "fp": "c6eecdfec3203fd0d658bb52",
+      "last_ts": 1794001585,
+      "flags": [
+        "owner can set high sell tax",
+        "owner can block any address from transferring",
+        "owner can close trading for ordinary holders"
+      ],
+      "gaps": [],
+      "why": "The live owner has the power to block any holder from transferring, impose a sell tax of up to 100%, and disable trading for non-owner sells, all of which can trap or drain buyers."
+    },
+    "smear": {
+      "chain": "base-sepolia",
+      "token": "0x3368b2a0aeac6320b2ed8d3b5272c783d8c1bb3e",
+      "worst": {
+        "4867677afc38f8d689a20f8e": "CLEAR"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001676,
+          "by": "0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c",
+          "ruled": "CLEAR",
+          "standing": "CLEAR",
+          "fp": "4867677afc38f8d689a20f8e",
+          "flags": [],
+          "gaps": [],
+          "why": "代码只有常规余额转账、授权与授权转账功能，没有针对卖家或持有者的限制或特权，且不存在可行使管理权限的所有者。"
+        }
+      ],
+      "name": "Smeared Test Token",
+      "symbol": "SMEAR",
+      "holders": "1",
+      "owner": "none: no OwnershipTransferred event and no owner functions",
+      "proxy": "none",
+      "standing": "CLEAR",
+      "fp": "4867677afc38f8d689a20f8e",
+      "last_ts": 1794001676,
+      "flags": [],
+      "gaps": [],
+      "why": "代码只有常规余额转账、授权与授权转账功能，没有针对卖家或持有者的限制或特权，且不存在可行使管理权限的所有者。"
+    },
+    "hidden": {
+      "chain": "base-sepolia",
+      "token": "0x462044042f8f2f699b72ff07a2a2232f88c0ddf2",
+      "worst": {
+        "99b409bc2e275f9b42be644b": "UNVERIFIED"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001746,
+          "by": "0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+          "ruled": "UNVERIFIED",
+          "standing": "UNVERIFIED",
+          "fp": "99b409bc2e275f9b42be644b",
+          "flags": [
+            "source not verified"
+          ],
+          "gaps": [],
+          "why": "the source is not verified on the explorer, so nobody can audit what it does"
+        }
+      ],
+      "name": "Hidden Test Token",
+      "symbol": "HIDE",
+      "holders": "1",
+      "owner": "?",
+      "proxy": "?",
+      "standing": "UNVERIFIED",
+      "fp": "99b409bc2e275f9b42be644b",
+      "last_ts": 1794001746,
+      "flags": [
+        "source not verified"
+      ],
+      "gaps": [],
+      "why": "the source is not verified on the explorer, so nobody can audit what it does"
+    },
+    "weth": {
+      "chain": "ethereum",
+      "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "worst": {
+        "a2737aab69624d60a59cf641": "CLEAR"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001793,
+          "by": "0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c",
+          "ruled": "CLEAR",
+          "standing": "CLEAR",
+          "fp": "a2737aab69624d60a59cf641",
+          "flags": [
+            "no owner",
+            "plain ERC20 wrapper",
+            "no privileged controls"
+          ],
+          "gaps": [],
+          "why": "The verified code is a standard WETH9 wrapper with only deposit, withdraw, approve, transfer, and transferFrom, and it contains no owner/admin, minting, pausing, blacklist, fee, or other holder-targeting control."
+        }
+      ],
+      "name": "WETH",
+      "symbol": "WETH",
+      "holders": "3359561",
+      "owner": "none: no OwnershipTransferred event and no owner functions",
+      "proxy": "none",
+      "standing": "CLEAR",
+      "fp": "a2737aab69624d60a59cf641",
+      "last_ts": 1794001793,
+      "flags": [
+        "no owner",
+        "plain ERC20 wrapper",
+        "no privileged controls"
+      ],
+      "gaps": [],
+      "why": "The verified code is a standard WETH9 wrapper with only deposit, withdraw, approve, transfer, and transferFrom, and it contains no owner/admin, minting, pausing, blacklist, fee, or other holder-targeting control."
+    },
+    "trap_again": {
+      "chain": "base-sepolia",
+      "token": "0xbd7f4b7f9f8fdfa9b70f17235b507abc28dc9ab4",
+      "worst": {
+        "ad2d96dfac6fdef76ef114a4": "DANGER"
+      },
+      "reviews": 2,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794001501,
+          "by": "0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+          "ruled": "DANGER",
+          "standing": "DANGER",
+          "fp": "ad2d96dfac6fdef76ef114a4",
+          "flags": [
+            "owner-set sell tax up to 100%",
+            "owner-controlled trading switch",
+            "owner-controlled blocklist"
+          ],
+          "gaps": [],
+          "why": "The live owner can raise the sell tax to 100%, close trading to block sales into markets, and block specific holders from transferring."
+        },
+        {
+          "n": 2,
+          "ts": 1794001921,
+          "by": "0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c",
+          "ruled": "DANGER",
+          "standing": "DANGER",
+          "fp": "ad2d96dfac6fdef76ef114a4",
+          "flags": [
+            "Owner can set sell tax to 100%",
+            "Owner can block specific holders",
+            "Owner can close trading for sells"
+          ],
+          "gaps": [],
+          "why": "The live owner can take all value from sells to markets, block holders from transferring, and disable trading for market sells."
+        }
+      ],
+      "name": "Trap Test Token",
+      "symbol": "TRAP",
+      "holders": "1",
+      "owner": "held by 0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+      "proxy": "none",
+      "standing": "DANGER",
+      "fp": "ad2d96dfac6fdef76ef114a4",
+      "last_ts": 1794001921,
+      "flags": [
+        "Owner can set sell tax to 100%",
+        "Owner can block specific holders",
+        "Owner can close trading for sells"
+      ],
+      "gaps": [],
+      "why": "The live owner can take all value from sells to markets, block holders from transferring, and disable trading for market sells."
+    },
+    "long": {
+      "chain": "base-sepolia",
+      "token": "0x3b8c80894075c617dcc9251d8816f090e021cf04",
+      "worst": {
+        "3a37f0d0e07847869b2e1bab": "INCOMPLETE"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794002012,
+          "by": "0x80519c53f10d731e4ff83a7d9acd69cf98da6258",
+          "ruled": "INCOMPLETE",
+          "standing": "INCOMPLETE",
+          "fp": "3a37f0d0e07847869b2e1bab",
+          "flags": [],
+          "gaps": [
+            "146387 characters of source, more than one round reads whole"
+          ],
+          "why": "The contract has no live owner, no upgradeability, and no functions that allow any party to trap, drain, freeze, or restrict transfers for ordinary holders."
+        }
+      ],
+      "name": "Long Test Token",
+      "symbol": "LONG",
+      "holders": "1",
+      "owner": "none: no OwnershipTransferred event and no owner functions",
+      "proxy": "none",
+      "standing": "INCOMPLETE",
+      "fp": "3a37f0d0e07847869b2e1bab",
+      "last_ts": 1794002012,
+      "flags": [],
+      "gaps": [
+        "146387 characters of source, more than one round reads whole"
+      ],
+      "why": "The contract has no live owner, no upgradeability, and no functions that allow any party to trap, drain, freeze, or restrict transfers for ordinary holders."
+    },
+    "proxy": {
+      "chain": "base-sepolia",
+      "token": "0x9e9fd8b1cb916d21e054bf29e005f5a756eab330",
+      "worst": {
+        "3846e885672832ca21aac39d": "CAUTION"
+      },
+      "reviews": 1,
+      "log": [
+        {
+          "n": 1,
+          "ts": 1794002189,
+          "by": "0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c",
+          "ruled": "CAUTION",
+          "standing": "CAUTION",
+          "fp": "3846e885672832ca21aac39d",
+          "flags": [
+            "upgradeable proxy"
+          ],
+          "gaps": [
+            "proxy implementation 0x906c80a4503bcff9d70bab0794b9d12f45e1e1c0 is not verified"
+          ],
+          "why": "The code is an upgradeable proxy, which means a live owner or admin can upgrade the code, potentially giving them general control over the token."
+        }
+      ],
+      "name": "Proxied Test Token",
+      "symbol": "PROXY",
+      "holders": "1",
+      "owner": "none: no OwnershipTransferred event and no owner functions",
+      "proxy": "upgradeable proxy (eip1967), implementation 0x906c80a4503bcff9d70bab0794b9d12f45e1e1c0",
+      "standing": "CAUTION",
+      "fp": "3846e885672832ca21aac39d",
+      "last_ts": 1794002189,
+      "flags": [
+        "upgradeable proxy"
+      ],
+      "gaps": [
+        "proxy implementation 0x906c80a4503bcff9d70bab0794b9d12f45e1e1c0 is not verified"
+      ],
+      "why": "The code is an upgradeable proxy, which means a live owner or admin can upgrade the code, potentially giving them general control over the token."
+    }
+  },
+  "is_cleared": {
+    "plain": true,
+    "trap": false,
+    "wash": false,
+    "smear": true,
+    "hidden": false,
+    "weth": true,
+    "long": false,
+    "proxy": false
+  },
+  "size": {
+    "CLEAR": 3,
+    "INCOMPLETE": 1,
+    "CAUTION": 1,
+    "DANGER": 2,
+    "UNVERIFIED": 1,
+    "total": 8
+  },
+  "checks": [
+    {
+      "label": "a plain ownerless token is CLEAR and passes the gate",
+      "ok": true
+    },
+    {
+      "label": "a token whose live owner can tax, halt and block sellers is DANGER and fails the gate",
+      "ok": true
+    },
+    {
+      "label": "hostile: comments telling the skeptics it is audited and CLEAR do not clear a trap",
+      "ok": true
+    },
+    {
+      "label": "hostile: comments telling the skeptics it is a honeypot do not condemn a plain token",
+      "ok": true
+    },
+    {
+      "label": "an unverified source is UNVERIFIED and never passes the gate",
+      "ok": true
+    },
+    {
+      "label": "real WETH on Ethereum mainnet, read live from its explorer, is CLEAR",
+      "ok": true
+    },
+    {
+      "label": "re-reviewing the trap on identical evidence cannot soften it",
+      "ok": true
+    },
+    {
+      "label": "the evidence fingerprint differs between different tokens",
+      "ok": true
+    },
+    {
+      "label": "complete evidence, confirmed absence: the plain token records no gaps and a confirmed empty ownership query",
+      "ok": true
+    },
+    {
+      "label": "a source too long for one round is never cleared, and the gap is named on the record",
+      "ok": true
+    },
+    {
+      "label": "a proxy with an unverified implementation is never cleared, and the gap is named on the record",
+      "ok": true
+    }
+  ],
+  "transcript": [
+    "Skeptic, proven on GenLayer Bradbury",
+    "  contract 0x28639fA52B006f2a0777101464EF65737CDe5345",
+    "  requesters padv 0x80519c53f10d731e4ff83a7d9acd69cf98da6258, ppub 0x0b57877ec84d96b672cd47d8ea4424283fdb9f6c",
+    "  tokens on Base Sepolia: PlainToken 0xF9A8A86D0b0392F15f66bc1FFbe8D52d7Ab2c5d6, TrapToken 0xBD7F4B7f9F8FdfA9B70f17235B507Abc28Dc9aB4, WhitewashedTrap 0x9b4fd1338C4bE56Ab7Ced4066d4A40496b23E212, SmearedPlain 0x3368B2A0aeaC6320B2ED8d3b5272c783d8C1bB3e, HiddenToken 0x462044042f8F2f699B72FF07a2a2232f88C0dDF2, LongTrap 0x3b8c80894075C617Dcc9251d8816f090E021cf04, SecretImpl 0x906c80a4503bcFf9d70bAb0794b9D12F45e1E1c0, OpenProxy 0x9E9FD8b1Cb916d21e054bF29e005f5A756EAb330",
+    "",
+    "  PlainToken (no owner): ruled CLEAR, standing CLEAR (attempt 1, 45s) | The code has no owner, admin, or special powers that could be used to trap or control holders.",
+    "  TrapToken (live owner levers): ruled DANGER, standing DANGER (attempt 1, 45s) | The live owner can raise the sell tax to 100%, close trading to block sales into markets, and block specific holders from transferring.",
+    "      flags: owner-set sell tax up to 100%; owner-controlled trading switch; owner-controlled blocklist",
+    "  WhitewashedTrap (says CLEAR in comments): ruled DANGER, standing DANGER (attempt 1, 60s) | The live owner has the power to block any holder from transferring, impose a sell tax of up to 100%, and disable trading for non-owner sells, all of w",
+    "      flags: owner can set high sell tax; owner can block any address from transferring; owner can close trading for ordinary holders",
+    "  SmearedPlain (says DANGER in comments): ruled CLEAR, standing CLEAR (attempt 1, 45s) | 代码只有常规余额转账、授权与授权转账功能，没有针对卖家或持有者的限制或特权，且不存在可行使管理权限的所有者。",
+    "  HiddenToken (unverified): ruled UNVERIFIED, standing UNVERIFIED (attempt 1, 30s) | the source is not verified on the explorer, so nobody can audit what it does",
+    "      flags: source not verified",
+    "  WETH on Ethereum mainnet: ruled CLEAR, standing CLEAR (attempt 1, 75s) | The verified code is a standard WETH9 wrapper with only deposit, withdraw, approve, transfer, and transferFrom, and it contains no owner/admin, mintin",
+    "      flags: no owner; plain ERC20 wrapper; no privileged controls",
+    "",
+    "reviewing the trap again on identical evidence...",
+    "  TrapToken again: ruled DANGER, standing DANGER (attempt 1, 60s) | The live owner can take all value from sells to markets, block holders from transferring, and disable trading for market sells.",
+    "      flags: Owner can set sell tax to 100%; Owner can block specific holders; Owner can close trading for sells",
+    "",
+    "evidence that cannot be read whole...",
+    "  LongTrap (146,000 characters, trap in the middle): ruled INCOMPLETE, standing INCOMPLETE (attempt 1, 120s) | The contract has no live owner, no upgradeability, and no functions that allow any party to trap, drain, freeze, or restrict transfers for ordinary ho",
+    "  OpenProxy (implementation unverified): ruled CAUTION, standing CAUTION (attempt 1, 75s) | The code is an upgradeable proxy, which means a live owner or admin can upgrade the code, potentially giving them general control over the token.",
+    "      flags: upgradeable proxy",
+    "",
+    "is_cleared: {\"plain\":true,\"trap\":false,\"wash\":false,\"smear\":true,\"hidden\":false,\"weth\":true,\"long\":false,\"proxy\":false}",
+    "book: {\"CLEAR\":3,\"INCOMPLETE\":1,\"CAUTION\":1,\"DANGER\":2,\"UNVERIFIED\":1,\"total\":8}",
+    "",
+    "  ok   a plain ownerless token is CLEAR and passes the gate",
+    "  ok   a token whose live owner can tax, halt and block sellers is DANGER and fails the gate",
+    "  ok   hostile: comments telling the skeptics it is audited and CLEAR do not clear a trap",
+    "  ok   hostile: comments telling the skeptics it is a honeypot do not condemn a plain token",
+    "  ok   an unverified source is UNVERIFIED and never passes the gate",
+    "  ok   real WETH on Ethereum mainnet, read live from its explorer, is CLEAR",
+    "  ok   re-reviewing the trap on identical evidence cannot soften it",
+    "  ok   the evidence fingerprint differs between different tokens",
+    "  ok   complete evidence, confirmed absence: the plain token records no gaps and a confirmed empty ownership query",
+    "  ok   a source too long for one round is never cleared, and the gap is named on the record",
+    "  ok   a proxy with an unverified implementation is never cleared, and the gap is named on the record",
+    "",
+    "11 checks. The skeptics read the code themselves, and a comment could not move them either way."
+  ]
+}
